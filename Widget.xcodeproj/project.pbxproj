@@ -1,0 +1,484 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EEB004331AA1DA02003CCB2F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB004321AA1DA02003CCB2F /* main.m */; };
+		EEB004361AA1DA02003CCB2F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB004351AA1DA02003CCB2F /* AppDelegate.m */; };
+		EEB0043C1AA1DA02003CCB2F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEB0043A1AA1DA02003CCB2F /* Main.storyboard */; };
+		EEB0043E1AA1DA02003CCB2F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEB0043D1AA1DA02003CCB2F /* Images.xcassets */; };
+		EEB004411AA1DA02003CCB2F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EEB0043F1AA1DA02003CCB2F /* LaunchScreen.xib */; };
+		EEB004591AA1DA1C003CCB2F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB004581AA1DA1C003CCB2F /* ViewController.m */; };
+		EEB004611AA1DAAC003CCB2F /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEB004601AA1DAAC003CCB2F /* NotificationCenter.framework */; };
+		EEB004691AA1DAAC003CCB2F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEB004681AA1DAAC003CCB2F /* MainInterface.storyboard */; };
+		EEB0046C1AA1DAAC003CCB2F /* Windy.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EEB0045E1AA1DAAC003CCB2F /* Windy.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EEB004771AA1DB2B003CCB2F /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB004731AA1DB2B003CCB2F /* TodayViewController.m */; };
+		EEB004781AA1DB2B003CCB2F /* WindDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB004761AA1DB2B003CCB2F /* WindDataManager.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EEB0046A1AA1DAAC003CCB2F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EEB004251AA1DA02003CCB2F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EEB0045D1AA1DAAC003CCB2F;
+			remoteInfo = Windy;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EEB004701AA1DAAC003CCB2F /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				EEB0046C1AA1DAAC003CCB2F /* Windy.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		EEB0042D1AA1DA02003CCB2F /* Widget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Widget.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEB004311AA1DA02003CCB2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EEB004321AA1DA02003CCB2F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EEB004341AA1DA02003CCB2F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EEB004351AA1DA02003CCB2F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EEB0043B1AA1DA02003CCB2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EEB0043D1AA1DA02003CCB2F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EEB004401AA1DA02003CCB2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		EEB004571AA1DA1C003CCB2F /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		EEB004581AA1DA1C003CCB2F /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		EEB0045E1AA1DAAC003CCB2F /* Windy.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Windy.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEB004601AA1DAAC003CCB2F /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		EEB004641AA1DAAC003CCB2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EEB004681AA1DAAC003CCB2F /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		EEB004721AA1DB2B003CCB2F /* TodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
+		EEB004731AA1DB2B003CCB2F /* TodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
+		EEB004751AA1DB2B003CCB2F /* WindDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindDataManager.h; sourceTree = "<group>"; };
+		EEB004761AA1DB2B003CCB2F /* WindDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WindDataManager.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EEB0042A1AA1DA02003CCB2F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EEB0045B1AA1DAAC003CCB2F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EEB004611AA1DAAC003CCB2F /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EEB004241AA1DA02003CCB2F = {
+			isa = PBXGroup;
+			children = (
+				EEB0042F1AA1DA02003CCB2F /* Widget */,
+				EEB004621AA1DAAC003CCB2F /* Windy */,
+				EEB0045F1AA1DAAC003CCB2F /* Frameworks */,
+				EEB0042E1AA1DA02003CCB2F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EEB0042E1AA1DA02003CCB2F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EEB0042D1AA1DA02003CCB2F /* Widget.app */,
+				EEB0045E1AA1DAAC003CCB2F /* Windy.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EEB0042F1AA1DA02003CCB2F /* Widget */ = {
+			isa = PBXGroup;
+			children = (
+				EEB004561AA1DA1C003CCB2F /* Controllers */,
+				EEB004341AA1DA02003CCB2F /* AppDelegate.h */,
+				EEB004351AA1DA02003CCB2F /* AppDelegate.m */,
+				EEB0043A1AA1DA02003CCB2F /* Main.storyboard */,
+				EEB0043D1AA1DA02003CCB2F /* Images.xcassets */,
+				EEB0043F1AA1DA02003CCB2F /* LaunchScreen.xib */,
+				EEB004301AA1DA02003CCB2F /* Supporting Files */,
+			);
+			path = Widget;
+			sourceTree = "<group>";
+		};
+		EEB004301AA1DA02003CCB2F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EEB004311AA1DA02003CCB2F /* Info.plist */,
+				EEB004321AA1DA02003CCB2F /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EEB004561AA1DA1C003CCB2F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EEB004571AA1DA1C003CCB2F /* ViewController.h */,
+				EEB004581AA1DA1C003CCB2F /* ViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		EEB0045F1AA1DAAC003CCB2F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EEB004601AA1DAAC003CCB2F /* NotificationCenter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EEB004621AA1DAAC003CCB2F /* Windy */ = {
+			isa = PBXGroup;
+			children = (
+				EEB004711AA1DB2B003CCB2F /* Controllers */,
+				EEB004741AA1DB2B003CCB2F /* Helpers */,
+				EEB004681AA1DAAC003CCB2F /* MainInterface.storyboard */,
+				EEB004631AA1DAAC003CCB2F /* Supporting Files */,
+			);
+			path = Windy;
+			sourceTree = "<group>";
+		};
+		EEB004631AA1DAAC003CCB2F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EEB004641AA1DAAC003CCB2F /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EEB004711AA1DB2B003CCB2F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EEB004721AA1DB2B003CCB2F /* TodayViewController.h */,
+				EEB004731AA1DB2B003CCB2F /* TodayViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		EEB004741AA1DB2B003CCB2F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				EEB004751AA1DB2B003CCB2F /* WindDataManager.h */,
+				EEB004761AA1DB2B003CCB2F /* WindDataManager.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EEB0042C1AA1DA02003CCB2F /* Widget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EEB004501AA1DA02003CCB2F /* Build configuration list for PBXNativeTarget "Widget" */;
+			buildPhases = (
+				EEB004291AA1DA02003CCB2F /* Sources */,
+				EEB0042A1AA1DA02003CCB2F /* Frameworks */,
+				EEB0042B1AA1DA02003CCB2F /* Resources */,
+				EEB004701AA1DAAC003CCB2F /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EEB0046B1AA1DAAC003CCB2F /* PBXTargetDependency */,
+			);
+			name = Widget;
+			productName = Widget;
+			productReference = EEB0042D1AA1DA02003CCB2F /* Widget.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EEB0045D1AA1DAAC003CCB2F /* Windy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EEB0046D1AA1DAAC003CCB2F /* Build configuration list for PBXNativeTarget "Windy" */;
+			buildPhases = (
+				EEB0045A1AA1DAAC003CCB2F /* Sources */,
+				EEB0045B1AA1DAAC003CCB2F /* Frameworks */,
+				EEB0045C1AA1DAAC003CCB2F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Windy;
+			productName = Windy;
+			productReference = EEB0045E1AA1DAAC003CCB2F /* Windy.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EEB004251AA1DA02003CCB2F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = Harshita;
+				TargetAttributes = {
+					EEB0042C1AA1DA02003CCB2F = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					EEB0045D1AA1DAAC003CCB2F = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = EEB004281AA1DA02003CCB2F /* Build configuration list for PBXProject "Widget" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EEB004241AA1DA02003CCB2F;
+			productRefGroup = EEB0042E1AA1DA02003CCB2F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EEB0042C1AA1DA02003CCB2F /* Widget */,
+				EEB0045D1AA1DAAC003CCB2F /* Windy */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EEB0042B1AA1DA02003CCB2F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EEB0043C1AA1DA02003CCB2F /* Main.storyboard in Resources */,
+				EEB004411AA1DA02003CCB2F /* LaunchScreen.xib in Resources */,
+				EEB0043E1AA1DA02003CCB2F /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EEB0045C1AA1DAAC003CCB2F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EEB004691AA1DAAC003CCB2F /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EEB004291AA1DA02003CCB2F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EEB004361AA1DA02003CCB2F /* AppDelegate.m in Sources */,
+				EEB004591AA1DA1C003CCB2F /* ViewController.m in Sources */,
+				EEB004331AA1DA02003CCB2F /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EEB0045A1AA1DAAC003CCB2F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EEB004771AA1DB2B003CCB2F /* TodayViewController.m in Sources */,
+				EEB004781AA1DB2B003CCB2F /* WindDataManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EEB0046B1AA1DAAC003CCB2F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EEB0045D1AA1DAAC003CCB2F /* Windy */;
+			targetProxy = EEB0046A1AA1DAAC003CCB2F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EEB0043A1AA1DA02003CCB2F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EEB0043B1AA1DA02003CCB2F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EEB0043F1AA1DA02003CCB2F /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EEB004401AA1DA02003CCB2F /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EEB0044E1AA1DA02003CCB2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		EEB0044F1AA1DA02003CCB2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EEB004511AA1DA02003CCB2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Widget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		EEB004521AA1DA02003CCB2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Widget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		EEB0046E1AA1DAAC003CCB2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Windy/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		EEB0046F1AA1DAAC003CCB2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = Windy/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EEB004281AA1DA02003CCB2F /* Build configuration list for PBXProject "Widget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EEB0044E1AA1DA02003CCB2F /* Debug */,
+				EEB0044F1AA1DA02003CCB2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EEB004501AA1DA02003CCB2F /* Build configuration list for PBXNativeTarget "Widget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EEB004511AA1DA02003CCB2F /* Debug */,
+				EEB004521AA1DA02003CCB2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EEB0046D1AA1DAAC003CCB2F /* Build configuration list for PBXNativeTarget "Windy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EEB0046E1AA1DAAC003CCB2F /* Debug */,
+				EEB0046F1AA1DAAC003CCB2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EEB004251AA1DA02003CCB2F /* Project object */;
+}
