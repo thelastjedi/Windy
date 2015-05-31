@@ -18,7 +18,9 @@
 
 
 @interface TodayViewController () <NCWidgetProviding, CLLocationManagerDelegate, WindDelegate>
-
+{
+    BOOL spinning;
+}
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
 @end
@@ -27,6 +29,7 @@
 @synthesize locationManager;
 
 - (void)viewDidLoad {
+    spinning = NO;
     [super viewDidLoad];
     [self  setupLocationManager];
     [[WindDataManager sharedManager] setWindDelegate:self];
@@ -44,6 +47,23 @@
     }
     
     [self.locationManager startUpdatingLocation];
+}
+
+
+- (void)spinThePinWheel {
+    if (!spinning) {
+        spinning = YES;
+        [UIView animateWithDuration: self.spinAnimationDuration
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveLinear
+                         animations: ^{
+                             self.pinwheel.transform = CGAffineTransformRotate(self.pinwheel.transform, -M_PI / 2);
+                         }
+                         completion: ^(BOOL finished) {
+                             spinning = !finished;
+                             [self spinThePinWheel];
+                         }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,14 +89,14 @@
     // kCLAuthorizationStatusDenied tells us that user denied permission
     if (status == kCLAuthorizationStatusDenied) {
         if([self shouldUpdateLabelWithSystemMsg]) {
-            [self.windLabel setText:PermissionDeniedText];
+            [self updateWindLabel:PermissionDeniedText];
         }
     }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     if([self shouldUpdateLabelWithSystemMsg]) {
-        [self.windLabel setText:LocationErrorText];
+        [self updateWindLabel:LocationErrorText];
     }
     NSLog(@"Failed to get location : %@", error.debugDescription);
 }
@@ -85,6 +105,11 @@
 
 -(void)updateWindLabel:(NSString*)text {
     if (text) [self.windLabel setText:text];
+    [self spinThePinWheel];
+}
+
+-(CGFloat)spinAnimationDuration {
+    return [[WindDataManager sharedManager] getPinwheelSpeed];
 }
 
 #pragma mark 

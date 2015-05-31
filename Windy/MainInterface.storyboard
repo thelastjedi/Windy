@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="M4Y-Lb-cyx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="M4Y-Lb-cyx">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Today View Controller-->
@@ -13,21 +14,42 @@
                         <viewControllerLayoutGuide type="bottom" id="FKl-LY-JtV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="37"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="GcN-lo-r42">
-                                <rect key="frame" x="20" y="8" width="280" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="GcN-lo-r42">
+                                <rect key="frame" x="130" y="8" width="183" height="134"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
                                 <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pinwheelstick" translatesAutoresizingMaskIntoConstraints="NO" id="eNL-Y4-JsQ">
+                                <rect key="frame" x="44" y="41" width="56" height="109"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="109" id="F6P-7g-Okj"/>
+                                    <constraint firstAttribute="width" constant="56" id="xKg-Eh-zSp"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pinned" translatesAutoresizingMaskIntoConstraints="NO" id="7nF-oB-Y8T">
+                                <rect key="frame" x="21" y="8" width="100" height="85"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="KCY-Mh-SY9"/>
+                                    <constraint firstAttribute="height" constant="85" id="iTm-PW-udt"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="GcN-lo-r42" secondAttribute="bottom" constant="8" symbolic="YES" id="0Q0-KW-PJ6"/>
-                            <constraint firstItem="GcN-lo-r42" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" constant="20" symbolic="YES" id="6Vq-gs-PHe"/>
-                            <constraint firstAttribute="trailing" secondItem="GcN-lo-r42" secondAttribute="trailing" constant="20" symbolic="YES" id="L8K-9R-egU"/>
-                            <constraint firstItem="GcN-lo-r42" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="8" symbolic="YES" id="mYS-Cv-VNx"/>
+                            <constraint firstItem="eNL-Y4-JsQ" firstAttribute="bottom" secondItem="FKl-LY-JtV" secondAttribute="top" id="Bxv-aM-h8l"/>
+                            <constraint firstItem="eNL-Y4-JsQ" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="41" id="Geh-u1-fgs"/>
+                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="7nF-oB-Y8T" secondAttribute="bottom" constant="57" id="Ln0-fi-1gb"/>
+                            <constraint firstItem="GcN-lo-r42" firstAttribute="leading" secondItem="7nF-oB-Y8T" secondAttribute="trailing" constant="9" id="MUn-3N-Jvk"/>
+                            <constraint firstItem="7nF-oB-Y8T" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" constant="5" id="Neb-UQ-cmI"/>
+                            <constraint firstItem="GcN-lo-r42" firstAttribute="top" secondItem="7nF-oB-Y8T" secondAttribute="top" id="Sad-Fe-2wp"/>
+                            <constraint firstItem="GcN-lo-r42" firstAttribute="leading" secondItem="eNL-Y4-JsQ" secondAttribute="trailing" constant="30" id="YEb-tg-z9K"/>
+                            <constraint firstItem="eNL-Y4-JsQ" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" constant="28" id="aUW-Y1-Uj1"/>
+                            <constraint firstItem="7nF-oB-Y8T" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="8" symbolic="YES" id="ghe-82-6K0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="GcN-lo-r42" secondAttribute="trailing" constant="-9" id="yRg-eA-NX1"/>
+                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="GcN-lo-r42" secondAttribute="bottom" constant="8" symbolic="YES" id="ye9-I5-XXk"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -35,16 +57,21 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="37"/>
+                    <size key="freeformSize" width="320" height="150"/>
                     <connections>
+                        <outlet property="pinwheel" destination="7nF-oB-Y8T" id="GTR-7G-0Rd"/>
                         <outlet property="windLabel" destination="GcN-lo-r42" id="YbF-Et-7qU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="516" y="285"/>
+            <point key="canvasLocation" x="7" y="165"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="pinned" width="115" height="111"/>
+        <image name="pinwheelstick" width="29" height="157"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

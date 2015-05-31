@@ -10,4 +10,5 @@
 
 @interface TodayViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel * windLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *pinwheel;
 @end

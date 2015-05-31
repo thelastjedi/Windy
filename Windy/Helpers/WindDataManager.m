@@ -25,7 +25,7 @@
 #define WIND_LONGITUDE_KEY      @"windLongitudeKey"
 #define WIND_LATITUDE_KEY       @"windLatitudeKey"
 #define WIND_LASTUPDATED_KEY    @"windLastUpdatedKey"
-
+#define WIND_BSNUM_KEY          @"windBeaufortNumberKey"
 #import "WindDataManager.h"
 
 @interface Windy : NSObject
@@ -34,6 +34,7 @@
 @property (nonatomic, retain) NSDate	* lastUpdated;
 @property (nonatomic, assign) CGFloat	  longitude;
 @property (nonatomic, assign) CGFloat	  latitude;
+@property (nonatomic, assign) NSInteger	  beaufortNum;
 
 @end
 
@@ -71,7 +72,6 @@
     if(![self shouldFetchWindData]||isUpdating)
     {
         [self loadLastSavedWind];
-        NSLog(@"not fetching now");
         return;
     }
     
@@ -83,7 +83,7 @@
         isUpdating = NO;
         
         if(!done){
-            [self invokeDelegateWithMessage:@"Error"];
+            [self invokeDelegateWithMessage:response];
         }
         else
         {
@@ -94,19 +94,13 @@
             currentWind.lastUpdated   = [NSDate date];
             currentWind.direction     = [NSString stringWithFormat:@"%@", response[@"deg"]];
             currentWind.speed         = [NSString stringWithFormat:@"%@", response[@"speed"]];
-            
+            currentWind.beaufortNum   = [self beaufortNumberFor:currentWind.speed];
             [self windWasUpdated];
         }
     }];
 }
 
 #pragma mark
-
-
--(void)invokeDelegateWithMessage:(NSString*)msg{
-    if([self.windDelegate respondsToSelector:@selector(updateWindLabel:)])
-        [self.windDelegate updateWindLabel:msg];
-}
 
 -(void)getWindDataForLatitude:(CGFloat)latitude andLongitude:(CGFloat)longitude completion:(void (^)(BOOL done, id response))dataCompletion;
 {
@@ -125,22 +119,94 @@
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response, NSData *data ,NSError *error) {
         
-        NSDictionary * jsonData = (NSDictionary *)[NSJSONSerialization JSONObjectWithData:data
-                                                                                  options:kNilOptions
-                                                                                    error:&error];
-        if(error)
+        NSDictionary * jsonData;
+        
+        if(data)
+            jsonData = (NSDictionary *)[NSJSONSerialization
+                                        JSONObjectWithData:data
+                                        options:kNilOptions
+                                        error:&error];
+        if((error)||(!jsonData))
         {
-            dataCompletion(NO, error);
+            dataCompletion(NO, error.localizedDescription);
         }
         else
         {
             if(!jsonData[@"wind"])
                 dataCompletion(NO, nil);
-            else
+            else{
                 NSLog(@"%@", jsonData);
                 dataCompletion(YES, jsonData[@"wind"]);
+            }
         }
     }];
+}
+
+#pragma mark - Beaufort Number
+
+-(NSInteger)beaufortNumberFor:(NSString*)windSpeedString{
+    
+    NSInteger windSpeed = [windSpeedString floatValue];
+    
+    NSRange beaufortNumber0 = NSMakeRange (0.0f, 0.3f);
+    NSRange beaufortNumber1 = NSMakeRange (0.3f, 1.5f);
+    NSRange beaufortNumber2 = NSMakeRange (1.5f, 3.3f);
+    NSRange beaufortNumber3 = NSMakeRange (3.3f, 5.5f);
+    NSRange beaufortNumber4 = NSMakeRange (5.5f, 8.0f);
+    NSRange beaufortNumber5 = NSMakeRange (8.0f, 10.8f);
+    NSRange beaufortNumber6 = NSMakeRange (10.8f, 13.9f);
+    NSRange beaufortNumber7 = NSMakeRange (13.9f, 17.2f);
+    NSRange beaufortNumber8 = NSMakeRange (17.2f, 20.7f);
+    NSRange beaufortNumber9 = NSMakeRange (20.7f, 24.5f);
+    
+    if (NSLocationInRange(windSpeed, beaufortNumber0)) {
+        return 0;
+    }
+    else if (NSLocationInRange(windSpeed, beaufortNumber1)) {
+        return 1;
+    }
+    else if (NSLocationInRange(windSpeed, beaufortNumber2)) {
+        return 2;
+    }
+    else if (NSLocationInRange(windSpeed, beaufortNumber3)){
+        return 3;
+    }
+    else if (NSLocationInRange(windSpeed, beaufortNumber4)){
+        return 4;
+    }
+    else if (NSLocationInRange(windSpeed, beaufortNumber5)){
+        return 5;
+    }
+    else if (NSLocationInRange(windSpeed, beaufortNumber6)){
+        return 6;
+    }
+    else if (NSLocationInRange(windSpeed, beaufortNumber7)){
+        return 7;
+    }
+    else if (NSLocationInRange(windSpeed, beaufortNumber8)){
+        return 8;
+    }
+    else if (NSLocationInRange(windSpeed, beaufortNumber9)){
+        return 9;
+    }
+    else return 10;
+}
+
+-(CGFloat)getPinwheelSpeed{
+    if(!currentWind){
+        return CGFLOAT_MAX;
+    }
+    else {
+        CGFloat bfNum = currentWind.beaufortNum;
+        if(bfNum < 2 ) {
+            return CGFLOAT_MAX;
+        }
+        else if(bfNum < 5 ){
+            bfNum--;
+        }
+        
+        return 0.5/bfNum;
+    }
 }
 
 #pragma mark - Rate Limiting
@@ -181,24 +247,46 @@
 
 -(void)loadLastSavedWind{
     NSData *windData = [[NSUserDefaults standardUserDefaults] objectForKey:WEATHER_OBJECT_KEY];
-    if(!windData) return;
-    self.currentWind  = [NSKeyedUnarchiver unarchiveObjectWithData:windData];
-    [self invokeDelegateWithMessage:currentWind.speed];
+    if(!windData) {
+        [self invokeDelegateWithMessage:@"Error"];
+        return;
+    }
+    currentWind  = [NSKeyedUnarchiver unarchiveObjectWithData:windData];
+    [self invokeDelegateWithMessage:[self getFormattedStringForDisplay]];
 }
 
 -(void)windWasUpdated{
-    NSData *windData = [NSKeyedArchiver archivedDataWithRootObject:self.currentWind];
+    NSData *windData = [NSKeyedArchiver archivedDataWithRootObject:currentWind];
     [[NSUserDefaults standardUserDefaults] setObject:windData forKey:WEATHER_OBJECT_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [self invokeDelegateWithMessage:currentWind.speed];
+    [self invokeDelegateWithMessage:[self getFormattedStringForDisplay]];
 }
 
+#pragma
+
+-(void)invokeDelegateWithMessage:(NSString*)msg{
+    if([self.windDelegate respondsToSelector:@selector(updateWindLabel:)]){
+        [self.windDelegate updateWindLabel:msg];
+    }
+}
+
+-(NSString*)getFormattedStringForDisplay{
+    NSString * windDirection = [self getWindDirection];
+    NSString * updateString = [NSString stringWithFormat:@"Speed: %@ m/s\n\nDirection: %@", currentWind.speed, windDirection];
+    return updateString;
+}
+
+-(NSString*)getWindDirection{
+    NSArray * arr = @[@"N", @"NNE", @"NE", @"ENE", @"E", @"ESE", @"SE", @"SSE", @"S", @"SSW", @"SW", @"WSW", @"W", @"WNW", @"NW", @"NNW", @"N"];
+    NSString *windDir = arr[(int)floor((([currentWind.direction floatValue] + 11.25)/22.5))];
+    return windDir;
+}
 
 @end
 
 @implementation Windy
 @synthesize direction, speed;
-@synthesize longitude, latitude;
+@synthesize longitude, latitude, beaufortNum;
 @synthesize lastUpdated;
 
 
@@ -210,16 +298,18 @@
         self.longitude    = [decoder decodeFloatForKey :WIND_LONGITUDE_KEY];
         self.latitude     = [decoder decodeFloatForKey :WIND_LATITUDE_KEY];
         self.lastUpdated  = [decoder decodeObjectForKey:WIND_LASTUPDATED_KEY];
+        self.beaufortNum  = [decoder decodeIntegerForKey:WIND_BSNUM_KEY];
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
-    [encoder encodeObject:self.direction    forKey:WIND_DIRECTION_KEY];
-    [encoder encodeObject:self.speed        forKey:WIND_SPEED_KEY];
-    [encoder encodeFloat:self.longitude     forKey:WIND_LONGITUDE_KEY];
-    [encoder encodeFloat:self.latitude      forKey:WIND_LATITUDE_KEY];
-    [encoder encodeObject:self.lastUpdated  forKey:WIND_LASTUPDATED_KEY];
+    [encoder encodeObject:self.direction     forKey:WIND_DIRECTION_KEY];
+    [encoder encodeObject:self.speed         forKey:WIND_SPEED_KEY];
+    [encoder encodeFloat:self.longitude      forKey:WIND_LONGITUDE_KEY];
+    [encoder encodeFloat:self.latitude       forKey:WIND_LATITUDE_KEY];
+    [encoder encodeObject:self.lastUpdated   forKey:WIND_LASTUPDATED_KEY];
+    [encoder encodeInteger:self.beaufortNum  forKey:WIND_BSNUM_KEY];
 }
 
 @end

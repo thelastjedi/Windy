@@ -18,9 +18,18 @@
 +(id)sharedManager;
 
 /**
- *  Fetch Wind data for given co-ordinates
+ *  Fetch wind data for given co-ordinates
  */
 -(void)updateWindDataForLatitude:(CGFloat)latitude andLongitude:(CGFloat)longitude;
+
+/**
+ *  Get animation duration of Pinwheel 
+ *  according to the current wind's Beaufort
+ *  Number
+ *
+ *  @return pinwheel animation duration
+ */
+-(CGFloat)getPinwheelSpeed;
 
 @property (nonatomic, strong) id<WindDelegate> windDelegate;
 
