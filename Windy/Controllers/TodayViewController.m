@@ -46,7 +46,14 @@
         [self.locationManager requestWhenInUseAuthorization];
     }
     
-    [self.locationManager startUpdatingLocation];
+    //iOS 9
+    if ([self.locationManager respondsToSelector:@selector(requestLocation)]) {
+        [self.locationManager requestLocation];
+    }
+    else{
+        [self.locationManager startUpdatingLocation];
+    }
+    
 }
 
 
@@ -73,7 +80,13 @@
 #pragma mark - NCWidgetProviding
 
 - (void)widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult))completionHandler{
-    [locationManager startUpdatingLocation];
+    //iOS 9
+    if ([self.locationManager respondsToSelector:@selector(requestLocation)]) {
+        [self.locationManager requestLocation];
+    }
+    else{
+        [self.locationManager startUpdatingLocation];
+    }
     completionHandler(NCUpdateResultNewData);
 }
 
@@ -112,7 +125,7 @@
     return [[WindDataManager sharedManager] getPinwheelSpeed];
 }
 
-#pragma mark 
+#pragma mark
 
 -(BOOL)shouldUpdateLabelWithSystemMsg {
     return ([self.windLabel.text isEqualToString:LocationLoadingText]) || ([self.windLabel.text isEqualToString:LocationErrorText]);
