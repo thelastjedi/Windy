@@ -46,7 +46,14 @@
         [self.locationManager requestWhenInUseAuthorization];
     }
     
-    [self.locationManager startUpdatingLocation];
+    //iOS 9
+    if ([self.locationManager respondsToSelector:@selector(requestLocation)]) {
+        [self.locationManager requestLocation];
+    }
+    else {
+        [self.locationManager startUpdatingLocation];
+    }
+    
 }
 
 
@@ -72,16 +79,23 @@
 
 #pragma mark - NCWidgetProviding
 
-- (void)widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult))completionHandler{
-    [locationManager startUpdatingLocation];
+- (void)widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult))completionHandler {
+    //iOS 9
+    if ([self.locationManager respondsToSelector:@selector(requestLocation)]) {
+        [self.locationManager requestLocation];
+    }
+    else {
+        [self.locationManager startUpdatingLocation];
+    }
     completionHandler(NCUpdateResultNewData);
 }
 
 #pragma mark - CLLocationManagerDelegate
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation: (CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-    CGFloat latitude  = manager.location.coordinate.latitude;
-    CGFloat longitude = manager.location.coordinate.longitude;
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    CLLocation* userLocation = (CLLocation*)(locations.lastObject);
+    CGFloat latitude  = userLocation.coordinate.latitude;
+    CGFloat longitude = userLocation.coordinate.longitude;
     [[WindDataManager sharedManager] updateWindDataForLatitude:latitude andLongitude:longitude];
 }
 
@@ -112,7 +126,7 @@
     return [[WindDataManager sharedManager] getPinwheelSpeed];
 }
 
-#pragma mark 
+#pragma mark
 
 -(BOOL)shouldUpdateLabelWithSystemMsg {
     return ([self.windLabel.text isEqualToString:LocationLoadingText]) || ([self.windLabel.text isEqualToString:LocationErrorText]);

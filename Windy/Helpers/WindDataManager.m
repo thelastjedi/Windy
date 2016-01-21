@@ -44,19 +44,17 @@
 #define OPEN_WEATHER_MAP_API_KEY    @"fe4fe9724fb8c6775d5ef2b61cbccce3"
 
 
-@interface WindDataManager()
-{
+@interface WindDataManager() {
     BOOL isUpdating;
 }
 
-@property (nonatomic, strong) Windy     * currentWind;
+@property (nonatomic, strong) Windy * currentWind;
 @end
 
 @implementation  WindDataManager
 @synthesize currentWind;
 
-+ (id)sharedManager
-{
++ (id)sharedManager {
     static WindDataManager *sharedManager = nil;
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
@@ -67,26 +65,24 @@
 
 #pragma mark - Public
 
--(void)updateWindDataForLatitude:(CGFloat)latitude andLongitude:(CGFloat)longitude{
+-(void)updateWindDataForLatitude:(CGFloat)latitude andLongitude:(CGFloat)longitude {
     
-    if(![self shouldFetchWindData]||isUpdating)
-    {
+    if(![self shouldFetchWindData]||isUpdating) {
         [self loadLastSavedWind];
         return;
     }
     
     isUpdating = YES;
 
-    [self getWindDataForLatitude:latitude andLongitude:longitude completion:^(BOOL done, id response){
+    [self getWindDataForLatitude:latitude andLongitude:longitude completion:^(BOOL done, id response) {
 
         [self apiWasCalled];
         isUpdating = NO;
         
-        if(!done){
+        if(!done) {
             [self invokeDelegateWithMessage:response];
         }
-        else
-        {
+        else {
             if(!currentWind) currentWind = [[Windy alloc] init];
 
             currentWind.latitude      = latitude;
@@ -102,10 +98,10 @@
 
 #pragma mark
 
--(void)getWindDataForLatitude:(CGFloat)latitude andLongitude:(CGFloat)longitude completion:(void (^)(BOOL done, id response))dataCompletion;
-{
-    NSString * urlString = @"http://api.openweathermap.org/data/2.5/weather?lat=%d&lon=%d";
-    urlString = [NSString stringWithFormat:urlString, (int)latitude, (int)longitude];
+-(void)getWindDataForLatitude:(CGFloat)latitude andLongitude:(CGFloat)longitude completion:(void (^)(BOOL done, id response))dataCompletion {
+    
+    NSString * urlString = @"http://api.openweathermap.org/data/2.5/weather?lat=%d&lon=%d&appid=%@";
+    urlString = [NSString stringWithFormat:urlString, (int)latitude, (int)longitude, OPEN_WEATHER_MAP_API_KEY];
     
     NSURL * url = [NSURL URLWithString:urlString];
     
@@ -114,27 +110,27 @@
                                      cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
                                      timeoutInterval:30];
 
-    [request setValue:OPEN_WEATHER_MAP_API_KEY forHTTPHeaderField:@"x-api-key"];
     [request setHTTPMethod:@"GET"];
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response, NSData *data ,NSError *error) {
         
         NSDictionary * jsonData;
         
-        if(data)
+        if(data) {
             jsonData = (NSDictionary *)[NSJSONSerialization
                                         JSONObjectWithData:data
                                         options:kNilOptions
                                         error:&error];
-        if((error)||(!jsonData))
-        {
+        }
+        
+        if((error)||(!jsonData)) {
             dataCompletion(NO, error.localizedDescription);
         }
-        else
-        {
-            if(!jsonData[@"wind"])
+        else {
+            if(!jsonData[@"wind"]) {
                 dataCompletion(NO, nil);
-            else{
+            }
+            else {
                 NSLog(@"%@", jsonData);
                 dataCompletion(YES, jsonData[@"wind"]);
             }
@@ -144,7 +140,7 @@
 
 #pragma mark - Beaufort Number
 
--(NSInteger)beaufortNumberFor:(NSString*)windSpeedString{
+-(NSInteger)beaufortNumberFor:(NSString*)windSpeedString {
     
     NSInteger windSpeed = [windSpeedString floatValue];
     
@@ -168,32 +164,32 @@
     else if (NSLocationInRange(windSpeed, beaufortNumber2)) {
         return 2;
     }
-    else if (NSLocationInRange(windSpeed, beaufortNumber3)){
+    else if (NSLocationInRange(windSpeed, beaufortNumber3)) {
         return 3;
     }
-    else if (NSLocationInRange(windSpeed, beaufortNumber4)){
+    else if (NSLocationInRange(windSpeed, beaufortNumber4)) {
         return 4;
     }
-    else if (NSLocationInRange(windSpeed, beaufortNumber5)){
+    else if (NSLocationInRange(windSpeed, beaufortNumber5)) {
         return 5;
     }
-    else if (NSLocationInRange(windSpeed, beaufortNumber6)){
+    else if (NSLocationInRange(windSpeed, beaufortNumber6)) {
         return 6;
     }
-    else if (NSLocationInRange(windSpeed, beaufortNumber7)){
+    else if (NSLocationInRange(windSpeed, beaufortNumber7)) {
         return 7;
     }
-    else if (NSLocationInRange(windSpeed, beaufortNumber8)){
+    else if (NSLocationInRange(windSpeed, beaufortNumber8)) {
         return 8;
     }
-    else if (NSLocationInRange(windSpeed, beaufortNumber9)){
+    else if (NSLocationInRange(windSpeed, beaufortNumber9)) {
         return 9;
     }
     else return 10;
 }
 
--(CGFloat)getPinwheelSpeed{
-    if(!currentWind){
+-(CGFloat)getPinwheelSpeed {
+    if(!currentWind) {
         return CGFLOAT_MAX;
     }
     else {
@@ -201,7 +197,7 @@
         if(bfNum < 2 ) {
             return CGFLOAT_MAX;
         }
-        else if(bfNum < 5 ){
+        else if(bfNum < 5 ) {
             bfNum--;
         }
         
@@ -211,24 +207,25 @@
 
 #pragma mark - Rate Limiting
 
--(void)apiWasCalled{
+-(void)apiWasCalled {
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:WEATHER_API_CALLED_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
--(NSDate*)lastApiCall{
+-(NSDate*)lastApiCall {
     return [[NSUserDefaults standardUserDefaults] objectForKey:WEATHER_API_CALLED_KEY];
 }
 
--(BOOL)shouldFetchWindData{
+-(BOOL)shouldFetchWindData {
     /**
      * As per the section "How to work with API in more effective way" from openweathermap.org/appid
      */
     NSDate * now         = [NSDate date];
     NSDate * lastApiHit  = [self lastApiCall];
     
-    if(!lastApiHit)
+    if(!lastApiHit) {
         return YES;
+    }
     
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSUInteger unitFlags = NSCalendarUnitMinute;
@@ -245,17 +242,17 @@
 
 #pragma mark - Save Windy
 
--(void)loadLastSavedWind{
+-(void)loadLastSavedWind {
     NSData *windData = [[NSUserDefaults standardUserDefaults] objectForKey:WEATHER_OBJECT_KEY];
     if(!windData) {
         [self invokeDelegateWithMessage:@"Error"];
         return;
     }
-    currentWind  = [NSKeyedUnarchiver unarchiveObjectWithData:windData];
+    currentWind = [NSKeyedUnarchiver unarchiveObjectWithData:windData];
     [self invokeDelegateWithMessage:[self getFormattedStringForDisplay]];
 }
 
--(void)windWasUpdated{
+-(void)windWasUpdated {
     NSData *windData = [NSKeyedArchiver archivedDataWithRootObject:currentWind];
     [[NSUserDefaults standardUserDefaults] setObject:windData forKey:WEATHER_OBJECT_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -264,19 +261,19 @@
 
 #pragma
 
--(void)invokeDelegateWithMessage:(NSString*)msg{
-    if([self.windDelegate respondsToSelector:@selector(updateWindLabel:)]){
+-(void)invokeDelegateWithMessage:(NSString*)msg {
+    if([self.windDelegate respondsToSelector:@selector(updateWindLabel:)]) {
         [self.windDelegate updateWindLabel:msg];
     }
 }
 
--(NSString*)getFormattedStringForDisplay{
+-(NSString*)getFormattedStringForDisplay {
     NSString * windDirection = [self getWindDirection];
     NSString * updateString = [NSString stringWithFormat:@"Speed: %@ m/s\n\nDirection: %@", currentWind.speed, windDirection];
     return updateString;
 }
 
--(NSString*)getWindDirection{
+-(NSString*)getWindDirection {
     NSArray * arr = @[@"N", @"NNE", @"NE", @"ENE", @"E", @"ESE", @"SE", @"SSE", @"S", @"SSW", @"SW", @"WSW", @"W", @"WNW", @"NW", @"NNW", @"N"];
     NSString *windDir = arr[(int)floor((([currentWind.direction floatValue] + 11.25)/22.5))];
     return windDir;
