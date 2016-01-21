@@ -50,7 +50,7 @@
     if ([self.locationManager respondsToSelector:@selector(requestLocation)]) {
         [self.locationManager requestLocation];
     }
-    else{
+    else {
         [self.locationManager startUpdatingLocation];
     }
     
