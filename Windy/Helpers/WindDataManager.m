@@ -48,7 +48,7 @@
     BOOL isUpdating;
 }
 
-@property (nonatomic, strong) Windy     * currentWind;
+@property (nonatomic, strong) Windy * currentWind;
 @end
 
 @implementation  WindDataManager
@@ -248,7 +248,7 @@
         [self invokeDelegateWithMessage:@"Error"];
         return;
     }
-    currentWind  = [NSKeyedUnarchiver unarchiveObjectWithData:windData];
+    currentWind = [NSKeyedUnarchiver unarchiveObjectWithData:windData];
     [self invokeDelegateWithMessage:[self getFormattedStringForDisplay]];
 }
 

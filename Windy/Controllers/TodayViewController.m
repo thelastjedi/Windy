@@ -79,12 +79,12 @@
 
 #pragma mark - NCWidgetProviding
 
-- (void)widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult))completionHandler{
+- (void)widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult))completionHandler {
     //iOS 9
     if ([self.locationManager respondsToSelector:@selector(requestLocation)]) {
         [self.locationManager requestLocation];
     }
-    else{
+    else {
         [self.locationManager startUpdatingLocation];
     }
     completionHandler(NCUpdateResultNewData);
@@ -93,7 +93,7 @@
 #pragma mark - CLLocationManagerDelegate
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    CLLocation* userLocation = (CLLocation*)[locations lastObject];
+    CLLocation* userLocation = (CLLocation*)(locations.lastObject);
     CGFloat latitude  = userLocation.coordinate.latitude;
     CGFloat longitude = userLocation.coordinate.longitude;
     [[WindDataManager sharedManager] updateWindDataForLatitude:latitude andLongitude:longitude];
