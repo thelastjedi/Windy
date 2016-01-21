@@ -92,9 +92,10 @@
 
 #pragma mark - CLLocationManagerDelegate
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation: (CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-    CGFloat latitude  = manager.location.coordinate.latitude;
-    CGFloat longitude = manager.location.coordinate.longitude;
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    CLLocation* userLocation = (CLLocation*)[locations lastObject];
+    CGFloat latitude  = userLocation.coordinate.latitude;
+    CGFloat longitude = userLocation.coordinate.longitude;
     [[WindDataManager sharedManager] updateWindDataForLatitude:latitude andLongitude:longitude];
 }
 
