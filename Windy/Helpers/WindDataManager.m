@@ -102,10 +102,10 @@
 
 #pragma mark
 
--(void)getWindDataForLatitude:(CGFloat)latitude andLongitude:(CGFloat)longitude completion:(void (^)(BOOL done, id response))dataCompletion;
-{
-    NSString * urlString = @"http://api.openweathermap.org/data/2.5/weather?lat=%d&lon=%d";
-    urlString = [NSString stringWithFormat:urlString, (int)latitude, (int)longitude];
+-(void)getWindDataForLatitude:(CGFloat)latitude andLongitude:(CGFloat)longitude completion:(void (^)(BOOL done, id response))dataCompletion {
+    
+    NSString * urlString = @"http://api.openweathermap.org/data/2.5/weather?lat=%d&lon=%d&appid=%@";
+    urlString = [NSString stringWithFormat:urlString, (int)latitude, (int)longitude, OPEN_WEATHER_MAP_API_KEY];
     
     NSURL * url = [NSURL URLWithString:urlString];
     
@@ -114,7 +114,6 @@
                                      cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
                                      timeoutInterval:30];
 
-    [request setValue:OPEN_WEATHER_MAP_API_KEY forHTTPHeaderField:@"x-api-key"];
     [request setHTTPMethod:@"GET"];
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response, NSData *data ,NSError *error) {
